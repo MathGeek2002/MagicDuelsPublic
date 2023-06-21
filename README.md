@@ -5,7 +5,7 @@ W przyszłości można dodać więcej graczy oraz trybów gry.
 W grze zostały zaimplementowane takie mechaniki jak generowanie losowego terenu, dynamiczne niszczenie terenu,
 zaklęcia oparte na systemach cząsteczkowych, własny system kolizji jak również obsługa kontrolerów.
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Aby skompilować projekt należy w pliku scons.ini wpisać jedną z poniższych linijek
 
@@ -26,6 +26,6 @@ Należy również mieć zainstalowane następujące biblioteki:<br />
 -freetype <br />
 -GNU Offloading and Multi-Processing Project (GOMP) <br />
 
-Należy również mieć zainstalowany SCons.
+Trzeba również mieć zainstalowany SCons.
 
 Projekt kompileje się za pomocą komedy scons w terminalu .
