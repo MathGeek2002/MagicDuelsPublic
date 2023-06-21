@@ -9,10 +9,10 @@ zaklęcia oparte na systemach cząsteczkowych, własny system kolizji jak równi
 
 Aby skompilować projekt należy w pliku scons.ini wpisać jedną z poniższych linijek
 
-;dla windows:<br />
+dla windows:<br />
 freetype=C:\\MinGW\\x86_64-w64-mingw32\\include\\freetype2 
 
-;dla linuxa:<br />
+dla linuxa:<br />
 freetype=/usr/include/freetype2 
 
 Należy również mieć zainstalowane następujące biblioteki:<br />
@@ -26,6 +26,6 @@ Należy również mieć zainstalowane następujące biblioteki:<br />
 -freetype <br />
 -GNU Offloading and Multi-Processing Project (GOMP) <br />
 
-Należy również mieć również zainstalowany SCons 
+Należy również mieć zainstalowany SCons.
 
-projekt kompileje się za pomocą komedy scons w terminalu 
+Projekt kompileje się za pomocą komedy scons w terminalu .
