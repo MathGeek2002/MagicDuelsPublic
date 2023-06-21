@@ -1,0 +1,6 @@
+[paths]
+;for windows
+;freetype=C:\\MinGW\\x86_64-w64-mingw32\\include\\freetype2 
+
+;for linux
+;freetype=/usr/include/freetype2 

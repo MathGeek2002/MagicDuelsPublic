@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+Import('env')
+
+my_incpath = []
+my_ccflags = ['-O3', '-Wall', '-std=c++17','-fopenmp']
+
+env.core_sources = env.core_sources + env.Object(
+    [
+        'GJK.cpp',
+        'Simplex.cpp',
+        'CollisionManager.cpp',
+        'Collider.cpp',
+        'SphereCollider.cpp',
+        'CollisionTests.cpp',
+        'CollisionSolver.cpp',
+        'ColliderAABB.cpp',
+        'CollisionTools.cpp',
+        'MeshCollider.cpp',
+        'CapsuleCollider.cpp',
+        'ColliderSet.cpp'
+    ],
+    CPPPATH=my_incpath,
+    CCFLAGS=my_ccflags
+)

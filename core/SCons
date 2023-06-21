@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+Import('env', 'config')
+
+my_incpath = [config['paths']['freetype']]
+
+SConscript(['graphics/SCons',
+            'Input/SCons',
+            'TransformComponent/SCons',
+            'Collisions/SCons',
+            'Audio/SCons',
+            'Physics/SCons',
+            'StateMachine/SCons',
+            'Memory/SCons',
+            'Utils/SCons',
+            'UI/SCons',
+            'ParticleSystem/SCons',
+            'Random/SCons',
+            'Scene/SCons',
+            ])
+
+env.core_sources = env.core_sources + env.Object(
+    ['Application.cpp', 'Object.cpp'],
+    CPPPATH=my_incpath
+)

@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+Import('env', 'config')
+
+my_incpath = [config['paths']['freetype']]
+
+env.core_sources = env.core_sources + env.Object(
+    [
+        'RenderEngine.cpp',
+        'Shader.cpp',
+        'Materials.cpp',
+        'Mesh.cpp',
+        'Model.cpp',
+        'ModelDraw.cpp',
+        'Image.cpp',
+        'Sprite.cpp',
+        'Camera2D.cpp',
+        'View.cpp',
+        'GraphicsComponent.cpp',
+        'AnimatedSprite.cpp',
+        'TextureSprite.cpp',
+        'Gizmo.cpp'
+    ],
+    CPPPATH=my_incpath
+)
