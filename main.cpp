@@ -10,6 +10,9 @@
 void InitData();
 void CreateGround(glm::vec3);
 
+
+unsigned int Random::seeds[] = {1677799643,1687441982,1687442239,16126,1687442668,17866};
+
 int main()
 {
     if (!Application::Init())
@@ -18,9 +21,10 @@ int main()
     }
     else
     {
+        srand((unsigned)time(NULL));
         // seeds: 1677799643
         //  1677692888
-        Random::Init(1677799643);
+        Random::Init(rand());
         RenderEngine::InitData();
         InitData();
         Application::Run();

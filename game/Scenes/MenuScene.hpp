@@ -14,6 +14,13 @@
 #include "../../core/graphics/GraphicsComponent.h"
 #include "../../core/Audio/Audio.h"
 #include "../../core/Audio/Sound.h"
+#include "../../core/Random/Random.hpp"
+#include <chrono>
+
+std::chrono::high_resolution_clock::time_point startTime;
+std::chrono::high_resolution_clock::time_point endTime;
+
+void SetRandomSeed();
 
 class PlayerSelectionScene;
 
@@ -43,6 +50,8 @@ public:
     {
         CollisionManager::initialized = false;
 
+        startTime = std::chrono::high_resolution_clock().now();
+
         clickSound = new Sound("ASSETS/audio/click-button.mp3",100);
         uiFont = new Font("ASSETS/fonts/alagard.ttf", 16);
 
@@ -56,7 +65,10 @@ public:
         playButton->sprite->ChangeTexture("ASSETS/ui/button_blank.png");
         playButton->SetAnchor(AnchorType::CENTER);
         playButton->onClick.connect([]()
-                                { SceneManager::LoadScene<PlayerSelectionScene>(); });
+        { 
+            SetRandomSeed();
+            SceneManager::LoadScene<PlayerSelectionScene>(); 
+        });
 
 
         playLabel = new TextLabel(0, -35, uiFont);
@@ -93,7 +105,9 @@ public:
             SetSelectedButton(exitButton,exitLabel);
         }
         if(Input::gamepadButtonDown(Gamepad::BUTTON_A) && selectedButton != nullptr)
+        {
             selectedButton->onClick.emit();
+        }
     }
 
     void SetSelectedButton(Button * newSelectedButton, TextLabel * buttonsLabel)
@@ -115,5 +129,13 @@ public:
             delete characterIcon;
     }
 };
+
+void SetRandomSeed()
+{
+    endTime = std::chrono::high_resolution_clock().now();
+    auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    unsigned int new_seed = time_span.count();
+    Random::Init(new_seed);
+}
 
 #endif

@@ -146,6 +146,15 @@ public:
             perlin[i] = _lcg.rand();
         }
     }
+
+    void resetNoise()
+    {
+        if(perlin != nullptr)
+        {
+            delete perlin;
+            perlin = nullptr;
+        }
+    }
 };
 
 PerlinNoise perlinNoise;

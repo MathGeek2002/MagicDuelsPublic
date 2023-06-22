@@ -1,8 +1,5 @@
 #include "Application.h"
 #include "graphics/RenderEngine.h"
-#include "../thirdparty/ImGui/imgui_impl_opengl3.h"
-#include "../thirdparty/ImGui/imgui_impl_sdl.h"
-#include "../thirdparty/ImGui/imgui.h"
 #include "Input/Input.h"
 #include "Audio/Audio.h"
 #include "UI/UI.h"
@@ -44,38 +41,19 @@ bool Application::Init()
     Audio::setMasterVolume(64);
     UI::Init();
 
-    ImGui::CreateContext();
-
-    ImGuiIO &io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-
-    ImGui::StyleColorsDark();
-
-    ImGui_ImplSDL2_InitForOpenGL(
-        RenderEngine::GetGameWindow(),
-        RenderEngine::GetContextOGL33());
-
-    ImGui_ImplOpenGL3_Init("#version 330 core");
-    io.Fonts->AddFontFromFileTTF("ASSETS/fonts/Cousine-Regular.ttf", 20);
-
     return success;
 }
 
 void Application::Close()
 {
-  Application::onRestart.disconnect_all();
-  Application::onWindowResized.disconnect_all();
+    Application::onRestart.disconnect_all();
+    Application::onWindowResized.disconnect_all();
   
-  CollisionManager::Close();
-  UI::Close();
-  RenderEngine::Close();
-  Audio::Close();
-  Input::Destroy();
-
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
-
+    CollisionManager::Close();
+    UI::Close();
+    RenderEngine::Close();
+    Audio::Close();
+    Input::Destroy();
     objectManager->removeAll();
 
     SDL_Quit();
@@ -102,7 +80,6 @@ void Application::PollEvents()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-        ImGui_ImplSDL2_ProcessEvent(&event);
         Input::ProcessEvent(&event);
 
         switch (event.type)
@@ -183,13 +160,6 @@ void Application::Run()
         PollEvents();
         Input::Update();
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
-
-        //bool _bool = false;
-        // ImGui::ShowDemoWindow(&_bool);
-
         if (!timePaused)
         {
             if (SceneManager::currentScene != nullptr)
@@ -201,8 +171,6 @@ void Application::Run()
         }
         RenderEngine::Draw();
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(RenderEngine::gameWindow);
         Input::postUpdate();
     }

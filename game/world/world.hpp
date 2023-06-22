@@ -18,7 +18,6 @@
 class World : public Entity
 {
 public:
-    TextureSprite *worldTexture;
     int width = 300, height = 188; // dimension in pixels
     int *worldData;
     float accTime = 0;
@@ -45,7 +44,7 @@ public:
                 }
 
                 // add border
-                int borderWidth = 8;
+                int borderWidth = 7;
                 int jBorder = (j <= borderWidth) || (j >= height - 1 - borderWidth);
                 int iBorder = (i <= borderWidth) || (i >= width - 1 - borderWidth);
                 if (iBorder || jBorder)
@@ -97,6 +96,7 @@ public:
                 testChunk = new WorldChunk(pos, chunkWidth, chunkSize, chunkData, this);
             }
         }
+        perlinNoise.resetNoise();
     }
 
     void UserUpdate(float dt)
@@ -168,11 +168,7 @@ public:
 
     ~World()
     {
-        Debug::Log("Terrain destroy start");
-        delete worldData;
-        Debug::Log("Terrain data delated");
-        //delete worldTexture; //TODO fix memory leak
-        Debug::Log("Terrain destroy end");
+        delete [] worldData;
     }
 };
 

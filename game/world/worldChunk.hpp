@@ -228,6 +228,12 @@ public:
         int index = glm::clamp(y, 0, size - 1) * size + glm::clamp(x, 0, size - 1);
         chunkData[index] = value;
     }
+
+    ~WorldChunk()
+    {
+        delete chunkTexture;
+        delete [] chunkData;
+    }
 };
 
 #endif
